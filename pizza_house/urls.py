@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from orders.views import menu
+from orders.views import menu, hamburger_menu, kebab_menu, pasta_menu, pizza_menu, salad_menu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,10 @@ urlpatterns = [
     path('', include('orders.urls')),
     path('menu/', menu, name='menu'),
     path('cart/', include('cart.urls')),
+    path('menu/pasta', pasta_menu, name='pasta_menu'),
+    path('menu/pizza', pizza_menu, name='pizza_menu'),
+    path('menu/salad', salad_menu, name='salad_menu'),
+    path('menu/hamburger', hamburger_menu, name='hamburger_menu'),
+    path('menu/kebab', kebab_menu, name='kebab_menu'),
+
 ]

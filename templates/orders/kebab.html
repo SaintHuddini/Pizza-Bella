@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Kebab</h1>
+{% for k in kebab %}
+
+<div class="row ml-3">
+    <div class="col-4 themed-grid-col">{{k.name}}</div>
+    <div class="col-4 themed-grid-col">{{k.description}}</div>
+    <div class="col-4 themed-grid-col">${{k.price}}</div>
+  </div>
+{% endfor %}
+
+{% endblock%}

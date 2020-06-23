@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1>Pasta</h1>
+{% for p in pasta %}
+
+<div class="row ml-3">
+    <div class="col-4 themed-grid-col">{{p.name}}</div>
+    <div class="col-4 themed-grid-col">{{p.description}}</div>
+    <div class="col-4 themed-grid-col">${{p.price}}</div>
+  </div>
+{% endfor %}
+
+{% endblock%}

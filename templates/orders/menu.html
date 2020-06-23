@@ -3,13 +3,13 @@
 
 {% block content %}
 
-<h1>Pizza</h1>
+<h1>Menu</h1>
 
 
 <div class="container">
 	<div class="row">
 		<div class="col-6">
-			<a class="btn" href="#" role="button">
+			<a class="btn" href="{% url 'hamburger_menu' %}" role="button">
 				<h1>Hamburger</h1>
 				<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1204&q=80" class="img-fluid"
                         alt="Responsive image">
@@ -17,15 +17,15 @@
 		</div>
 
 		<div class="col-6">
-			<a class="btn " href="#" role="button">
+			<a class="btn " href="{% url 'pasta_menu' %}" role="button">
 				<h1>Pasta</h1>
 				<img src="https://images.unsplash.com/photo-1518675219903-c682c4b16b1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80" class="img-fluid"
                         alt="Responsive image">
             </a>
 		</div>
 
-		<div class="w-100 h-50">
-			<a class="btn" href="#" role="button">
+		<div class="col-12">
+			<a class="btn" href="{% url 'pizza_menu' %}"role="button">
 				<h1>Pizza</h1>
 				<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="img-fluid"
                         alt="Responsive image">
@@ -34,14 +34,14 @@
 		</div>
 
 		<div class="col-6">
-			<a class="btn " href="#" role="button">
+			<a class="btn " href="{% url 'salad_menu' %}" role="button">
 				<h1>Salad</h1>
 				<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="img-fluid"
                         alt="Responsive image">
              </a>
 		</div>
 		<div class="col-6">
-			<a class="btn " href="#" role="button">
+			<a class="btn " href="{% url 'kebab_menu' %}" role="button">
 				<h1>Kebab</h1>
 				<img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1510&q=80" class="img-fluid"
                         alt="Responsive image">
