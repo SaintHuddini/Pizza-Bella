@@ -20,11 +20,10 @@ from orders.views import menu, hamburger_menu, kebab_menu, pasta_menu, pizza_men
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('cart/', include('cart.urls', namespace='cart')),
     path('', include('orders.urls')),
     path('menu/', menu, name='menu'),
-    path('cart/', include('cart.urls')),
     path('menu/pasta', pasta_menu, name='pasta_menu'),
-    path('menu/pizza', pizza_menu, name='pizza_menu'),
     path('menu/salad', salad_menu, name='salad_menu'),
     path('menu/hamburger', hamburger_menu, name='hamburger_menu'),
     path('menu/kebab', kebab_menu, name='kebab_menu'),

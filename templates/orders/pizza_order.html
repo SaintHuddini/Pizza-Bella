@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Choose your order</h1>
+
+
+<div class="row ml-3">
+	<div class="col-3 themed-grid-col">{{Pizza.name}}</div>
+	<div class="col-3 themed-grid-col">{{Pizza.description}}</div>
+	<div class="col-3 themed-grid-col">${{Pizza.price}}</div>
+	<form action="{%  url 'cart:cart_add' Pizza.id%}" method="POST"> {% csrf_token %}
+		{{cart_food_form}}
+		<input type="submit" value="Add to Cart">
+</form>
+</div>
+
+{% endblock%}

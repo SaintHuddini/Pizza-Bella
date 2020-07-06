@@ -4,13 +4,17 @@
 {% block content %}
 
 <h1>Pizza</h1>
-{% for p in pizza %}
 
-<div class="row ml-3">
-    <div class="col-4 themed-grid-col">{{p.name}}</div>
-    <div class="col-4 themed-grid-col">{{p.description}}</div>
-    <div class="col-4 themed-grid-col">${{p.price}}</div>
-  </div>
-{% endfor %}
+
+{% for p in pizza %}
+<div class="row ml-3 order_detail">
+	<div class="col-3 themed-grid-col">{{p.name}}</div>
+	<div class="col-3 themed-grid-col">{{p.description}}</div>
+	<div class="col-3 themed-grid-col">${{p.price}}</div>
+	<div class="col-3 themed-grid-col"> <a href="{% url 'pizza_order' p.id %}" class="btn btn-large"> Add to delivery</a></div>
+</div>
+
+{% endfor  %}
+
 
 {% endblock%}

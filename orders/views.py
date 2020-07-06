@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
+from cart.forms import CartAddFoodForm
 from .models import Recipe
+from django.http import HttpResponse
 # Create your views here.
 
 pizza = Recipe.objects.filter(category='PIZZA')
@@ -26,6 +28,20 @@ def pizza_menu(request):
         'pizza': pizza,
     }
     return render(request, 'orders/pizza.html', context)
+
+
+def pizza_order(request, order_id):
+    """ A view to show individual product details """
+
+    Pizza = get_object_or_404(Recipe, pk=order_id)
+    cart_food_form = CartAddFoodForm
+    context = {
+        'Pizza': Pizza,
+        'cart_food_form': cart_food_form,
+
+    }
+
+    return render(request, 'orders/pizza_order.html', context)
 
 
 def kebab_menu(request):
