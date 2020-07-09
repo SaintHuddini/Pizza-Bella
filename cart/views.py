@@ -24,7 +24,8 @@ def cart_add(request, food_id):
 def cart_remove(request, id):
     cart = Cart(request)
     food = get_object_or_404(Recipe, pk=id)
-    cart.remove(id)
+    cart.cart.pop(id)
+    cart.save()
     return redirect('cart:cart_detail')
 
 

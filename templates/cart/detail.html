@@ -8,13 +8,13 @@
 <h1>Food Cart</h1>
 
 <table>
-	 {% for id, item in cart.items %}
+	 {% for id, item in cart.cart.items %}
 	
 			<div class="row ml-3 order_detail">
 				<div class="col-3 themed-grid-col">${{item.price}}</div>
 				<div class="col-3 themed-grid-col">{{item.quantity}}</div>
 			</div>
-            <form action="{% url 'cart:cart_remove' item.id %} " method="POST">{% csrf_token %}
+            <form action="{% url 'cart:cart_remove' id %} " method="POST">{% csrf_token %}
             <input type="submit" value="remove">
             
             </form>

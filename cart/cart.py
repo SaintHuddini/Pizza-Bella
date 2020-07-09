@@ -33,8 +33,8 @@ class Cart(object):
         self.session.modified = True
 
     def remove(self, food):
-        food_id = food.id
-        if food_id in self.cart:
+        id = food.id
+        if id in self.cart:
             del self.cart[food.id]
             self.save()
 
@@ -64,9 +64,8 @@ class Cart(object):
 
     def get_total_price(self):
         total_price = 0
-        for item in self.cart.values():
-            total_price += (Decimal(item['price'] * item['quantity']))
-        return total_price
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
         
     def clear(self):
         
