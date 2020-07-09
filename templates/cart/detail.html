@@ -20,7 +20,7 @@
             </form>
 		</div>
 	</div>
-	<form action="{% url 'cart:cart_add' id %} " method="POST">{% csrf_token %}
+	<form action="{% url 'cart:cart_remove' id %} " method="POST">{% csrf_token %}
 		<input type="submit" value="remove">
 
             </form>
