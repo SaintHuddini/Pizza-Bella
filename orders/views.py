@@ -30,10 +30,10 @@ def pizza_menu(request):
     return render(request, 'orders/pizza.html', context)
 
 
-def pizza_order(request, order_id):
+def pizza_order(request, food_id):
     """ A view to show individual product details """
 
-    Pizza = get_object_or_404(Recipe, pk=order_id)
+    Pizza = get_object_or_404(Recipe, pk=food_id)
     cart_food_form = CartAddFoodForm
     context = {
         'Pizza': Pizza,

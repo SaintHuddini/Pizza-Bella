@@ -19,11 +19,12 @@ def cart_add(request, food_id):
         cart.add(food=food, quantity=cd['quantity'], override_quantity=cd['override'])
         return redirect('cart:cart_detail')
 
+
 @require_POST
-def cart_remove(request, food_id):
+def cart_remove(request, id):
     cart = Cart(request)
-    food = get_object_or_404(Recipe, id=food_id)
-    cart.remove(food)
+    food = get_object_or_404(Recipe, pk=id)
+    cart.remove(id)
     return redirect('cart:cart_detail')
 
 

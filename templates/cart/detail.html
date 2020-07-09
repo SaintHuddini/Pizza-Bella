@@ -8,31 +8,28 @@
 <h1>Food Cart</h1>
 
 <table>
-	{% for item in cart %}
-	<tr>
-
-		<td>
-			{{item.name}}
-
-		</td>
-		<td>{{item.quantity}}</td>
-		<td>
-			
-		</td>
-		<td class="num">$ {{item.price}}</td>
-		<td class="num">$ {{item.total_price}}</td>
-	</tr>
+	 {% for id, item in cart.items %}
+	
+			<div class="row ml-3 order_detail">
+				<div class="col-3 themed-grid-col">${{item.price}}</div>
+				<div class="col-3 themed-grid-col">{{item.quantity}}</div>
+			</div>
+            <form action="{% url 'cart:cart_remove' item.id %} " method="POST">{% csrf_token %}
+            <input type="submit" value="remove">
+            
+            </form>
+	
 	{% endfor %}
-    <tr class="total">
-        <td> Total</td>
-        <td class="col-span-4"></td>
-        <td class="num"> $ {{cart.get_total_price}}</td>
-    </tr>
+
+	<tr class="total">
+		<td> Total</td>
+		<td class="col-span-4"></td>
+		<td class="num"> $ {{cart.get_total_price}}</td>
+	</tr>
 </table>
 
 <p class="text-right">
-<a href="{% url 'menu'%}" class="button light"> Continue Ordering</a>
-<a href="#" class="button"> Checkout</a>
+	<a href="{% url 'menu'%}" class="button light"> Continue Ordering</a>
 </p>
 
 {% endblock %}
