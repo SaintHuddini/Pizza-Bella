@@ -1,9 +1,12 @@
 
 
+from cart.cart import Cart
+
 def cart_contents(request):
 
-    cart_items = []
-    total = 0
+    cart = Cart(request)
+    
+    total = cart.get_total_price()
     product_count = 0
     delivery = 0
     grand_total = delivery + total 
