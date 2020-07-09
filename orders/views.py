@@ -24,46 +24,42 @@ def menu(request):
     return render(request, 'orders/menu.html', context)
 
 def pizza_menu(request):
+    cart_food_form = CartAddFoodForm
     context = {
         'pizza': pizza,
+        'cart_food_form': cart_food_form,
     }
     return render(request, 'orders/pizza.html', context)
 
 
-def pizza_order(request, food_id):
-    """ A view to show individual product details """
-
-    Pizza = get_object_or_404(Recipe, pk=food_id)
+def kebab_menu(request):
     cart_food_form = CartAddFoodForm
     context = {
-        'Pizza': Pizza,
-        'cart_food_form': cart_food_form,
-
-    }
-
-    return render(request, 'orders/pizza_order.html', context)
-
-
-def kebab_menu(request):
-    context = {
         'kebab': kebab,
+        'cart_food_form': cart_food_form,
     }
     return render(request, 'orders/kebab.html', context)
 
 def salad_menu(request):
+    cart_food_form = CartAddFoodForm
     context = {
         'salad': salad,
+        'cart_food_form': cart_food_form,
     }
     return render(request, 'orders/salad.html', context)
 
 def pasta_menu(request):
+    cart_food_form = CartAddFoodForm
     context = {
         'pasta': pasta,
+        'cart_food_form': cart_food_form,
     }
     return render(request, 'orders/pasta.html', context)
 
 def hamburger_menu(request):
+    cart_food_form = CartAddFoodForm
     context = {
         'hamburger': hamburger,
+        'cart_food_form': cart_food_form,
     }
     return render(request, 'orders/hamburger.html', context)

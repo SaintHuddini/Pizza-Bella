@@ -7,11 +7,14 @@
 
 
 {% for p in pizza %}
-<div class="row ml-3 order_detail">
+<div class="row ml-3">
 	<div class="col-3 themed-grid-col">{{p.name}}</div>
 	<div class="col-3 themed-grid-col">{{p.description}}</div>
 	<div class="col-3 themed-grid-col">${{p.price}}</div>
-	<div class="col-3 themed-grid-col"> <a href="{% url 'pizza_order' p.id %}" class="btn btn-large"> Add to delivery</a></div>
+	<form action="{%  url 'cart:cart_add' p.id%}" method="POST"> {% csrf_token %}
+		{{cart_food_form}}
+		<input type="submit" value="Add to Cart">
+</form>
 </div>
 
 {% endfor  %}

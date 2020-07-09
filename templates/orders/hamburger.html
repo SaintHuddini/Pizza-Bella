@@ -4,13 +4,20 @@
 {% block content %}
 
 <h1>Hamburger</h1>
-{% for h in hamburger %}
 
+
+{% for h in hamburger %}
 <div class="row ml-3">
-    <div class="col-4 themed-grid-col">{{h.name}}</div>
-    <div class="col-4 themed-grid-col">{{h.description}}</div>
-    <div class="col-4 themed-grid-col">${{h.price}}</div>
-  </div>
-{% endfor %}
+	<div class="col-3 themed-grid-col">{{h.name}}</div>
+	<div class="col-3 themed-grid-col">{{h.description}}</div>
+	<div class="col-3 themed-grid-col">${{h.price}}</div>
+	<form action="{%  url 'cart:cart_add' h.id%}" method="POST"> {% csrf_token %}
+		{{cart_food_form}}
+		<input type="submit" value="Add to Cart">
+</form>
+</div>
+
+{% endfor  %}
+
 
 {% endblock%}
