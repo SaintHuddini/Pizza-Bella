@@ -43,9 +43,7 @@ class Cart(object):
         foods = Recipe.objects.filter(id__in=food_ids)
         cart = self.cart.copy()
         for food in foods:
-            if food.id in self.cart:
-
-                cart[food.id]['food'] = food
+            cart[str(food.id)]['food'] = food
         print(cart)
             
         for item in cart.values():
