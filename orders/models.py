@@ -25,22 +25,6 @@ class Recipe(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-class PaymentState(models.Model):
-
-    status = models.CharField(max_length=48, null=False, blank=False, default='PENDING')
-
-    def __str__(self):
-        return f'{self.status}'
-
-
-class OrderItem(models.Model):
-    foods         = models.ManyToManyField(Recipe)
-    extra         = models.ManyToManyField(Ingredient, blank=True)
-    price         = models.DecimalField(decimal_places=2, max_digits=4, null=True) 
-    order_item_state      = models.CharField(max_length=32, default='PENDING', choices= (('PENDING', 'Pending'), ('PROCCESSING', 'Proccessing'), ('DELIVERING', 'Delivering'))) 
-    
-    def __str__(self):
-        return f'{self.foods}'
 
 
 class Payments(models.Model):
@@ -48,23 +32,33 @@ class Payments(models.Model):
     class Meta:
         verbose_name_plural = 'Payments'
 
-    state = models.ForeignKey(PaymentState, on_delete=models.PROTECT, default=0)
-    gateway = models.CharField(max_length=48, null=False, default='Credit')
+    payment_state      = models.CharField(max_length=32, default='PENDING', choices= (('PENDING', 'Pending'), ('RECEIVED', 'Received'), ('FAILURE', 'Failure')))
+    gateway = models.CharField(max_length=48, null=True, default='Credit', choices= (('CREDIT', 'Credit'), ('STRIPE', 'Stripe')))
 
     def __str__(self):
-        return f'{self.status}'
+        return f'{self.payment_state}'
 
 
 class CartOrder(models.Model):
      
 
-    items         = models.ManyToManyField(OrderItem)
     time          = models.DateTimeField(default=timezone.now)
     total_price   = models.DecimalField(decimal_places=2, max_digits=4, default=0)
     cart_state      = models.CharField(max_length=32, default='PENDING', choices= (('PENDING', 'Pending'), ('PROCCESSING', 'Proccessing'), ('DELIVERING', 'Delivering'))) 
-    payment       = models.ForeignKey(Payments, on_delete=models.PROTECT, blank=False, default=0)
-    customer      = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    payment       = models.ForeignKey(Payments, on_delete=models.PROTECT, blank=False, default=1)
+    customer      = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
 
 
     def __str__(self): 
-        return f'{self.items}'
+        return f'{self.total_price}'
+
+class OrderItem(models.Model):
+    food          = models.ForeignKey(Recipe, on_delete=models.PROTECT, null=True)
+    cart          = models.ForeignKey(CartOrder, on_delete=models.CASCADE, null=True)
+    extra         = models.ManyToManyField(Ingredient, blank=True)
+    price         = models.DecimalField(decimal_places=2, max_digits=4, null=True) 
+    quantity = models.IntegerField(default=1)
+    order_item_state      = models.CharField(max_length=32, default='PENDING', choices= (('PENDING', 'Pending'), ('PROCCESSING', 'Proccessing'), ('DELIVERING', 'Delivering'))) 
+    
+    def __str__(self):
+        return f'{self.foods}'

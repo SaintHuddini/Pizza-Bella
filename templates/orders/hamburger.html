@@ -11,8 +11,8 @@
 	<div class="col-3 themed-grid-col">{{h.name}}</div>
 	<div class="col-3 themed-grid-col">{{h.description}}</div>
 	<div class="col-3 themed-grid-col">${{h.price}}</div>
-	<form action="{%  url 'cart:cart_add' h.id%}" method="POST"> {% csrf_token %}
-		{{cart_food_form}}
+	<form action="#" method="POST"> {% csrf_token %}
+
 		<input type="submit" value="Add to Cart">
 </form>
 </div>

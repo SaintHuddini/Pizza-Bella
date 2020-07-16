@@ -1,9 +1,9 @@
-from django.urls import path, include, re_path
-from .views import cart_detail, cart_add, cart_remove
-
-app_name = 'cart'
+from django.contrib import admin
+from django.urls import path, include
+from . import views
 urlpatterns = [
-    path('', cart_detail, name='cart_detail'),
-    path('add/<int:food_id>', cart_add, name='cart_add'),
-    path('remove/<str:id>', cart_remove, name='cart_remove'),
+    path('', views.view_cart, name='view_cart'),
+    path('add/<item_id>/', views.add_to_cart, name='add_to_cart'),
+    path('adjust/<item_id>/', views.adjust_cart, name='adjust_cart'),
+    path('remove/<item_id>/', views.remove_from_cart, name='remove_from_cart'),
 ]

@@ -1,39 +1,43 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_POST
-from orders.models import Recipe
-from .cart import Cart
-from .forms import CartAddFoodForm
-from django.http import HttpResponse
-# Create your views here.
+from django.shortcuts import render, redirect, reverse
 
+def view_cart(request):
+    return render(request, 'cart/cart.html')
 
-def cart_detail(request):
-    cart = Cart(request)
-    for item in cart:
-        item['update_quantity_form'] = CartAddFoodForm(initial={
-            'quantity': item['quantity'],
-            'override': True
-        })
+def add_to_cart(request, item_id):
     
-    return render(request, 'cart/detail.html', {'cart': cart})
+    quantity = int(request.POST.get('quantity'))
+    redirect_url = request.POST.get('redirect_url')
+    cart = request.session.get('cart', {})
+
+    if item_id in list(cart.keys()):
+        cart[item_id] += quantity
+    else: 
+        cart[item_id] = quantity
+
+    request.session['cart'] = cart
+    return redirect(redirect_url)
+
+def adjust_cart(request, item_id):
+    
+    quantity = int(request.POST.get('quantity'))
+    cart = request.session.get('cart', {})
+
+    if quantity > 0:
+        cart[item_id] = quantity
+    else: 
+        cart.pop(item_id)
+
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))
 
 
-@require_POST
-def cart_add(request, food_id):
-    cart = Cart(request)
-    food = get_object_or_404(Recipe, pk=food_id)
-    form = CartAddFoodForm(request.POST)
-    if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(food=food, quantity=cd['quantity'],
-                 override_quantity=cd['override'])
-        return redirect('cart:cart_detail')
+def remove_from_cart(request, item_id):
+    
 
+    cart = request.session.get('cart', {})
 
-@require_POST
-def cart_remove(request, id):
-    cart = Cart(request)
-    food = get_object_or_404(Recipe, pk=id)
-    cart.cart.pop(id)
-    cart.save()
-    return redirect('cart:cart_detail')
+    
+    cart.pop(item_id)
+
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))

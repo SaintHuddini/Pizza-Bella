@@ -14,25 +14,24 @@
         <div class="col-3 themed-grid-col">Price:</div>
 		<div class="col-3 themed-grid-col">Quantity:</div>
 	</div>
-	{% for id, item in cart.cart.items %}
-	{% with food=item.food %}
+	
 
 
 
 
 	<div class="row ml-3 order_detail">
-		<div class="col-3 themed-grid-col">{{food.name}}</div>
-		<div class="col-3 themed-grid-col">${{item.price}}
+		<div class="col-3 themed-grid-col"></div>
+		<div class="col-3 themed-grid-col">
 		</div>
         <div class="col-3 themed-grid-col">
 			<form action="{% url 'cart:cart_add' id %} " method="POST">{% csrf_token %}
-				{{item.update_quantity_form.quantity}}
-				{{item.update_quantity_form.override}}
+				
+	
 				<input type="submit" class="btn btn-sm btn-light" value="Update">
             </form>
 		</div>
 		<div class="col-3 themed-grid-col">
-			<form action="{% url 'cart:cart_remove' id %} " method="POST">
+			<form action="#" method="POST">
 				{% csrf_token %}
 				<input type="submit" value="remove" class="btn btn-danger text-right">
 
@@ -40,12 +39,9 @@
 		</div>
 	</div>
 
-	{% endwith%}
-	{% endfor %}
-
 	<tr class="total">
 		<td class="ml-8"> <h4>Total:</h4></td>
-		<td class="num"> $ {{cart.get_total_price}}</td>
+		<td class="num"> </td>
 	</tr>
 </table>
 
