@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'orders',
     'cart',
     'allauth.socialaccount',
-    'checkout'
+    'checkout',
+
+    # extra
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -58,10 +62,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'pizza_house.urls'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth') ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +77,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.contexts.cart_contents',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
@@ -79,7 +89,7 @@ AUTHENTICATION_BACKENDS = [
 
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
-    
+
 ]
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
