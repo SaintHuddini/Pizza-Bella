@@ -66,3 +66,7 @@ h2.display-7 {
 .allauth-form-inner-content a {
 	color: #17a2b8; /* text-info */
 }
+
+input[name='q']::placeholder {
+    color: #aab7c4;
+}
