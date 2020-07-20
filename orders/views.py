@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe
 from django.http import HttpResponse
+from .forms import FoodForm
 # Create your views here.
 
 pizza = Recipe.objects.filter(category='PIZZA')
@@ -52,3 +53,13 @@ def hamburger_menu(request):
         'hamburger': hamburger,
     }
     return render(request, 'orders/hamburger.html', context)
+
+def add_food(request):
+    """ Add a product to the store """
+    form = FoodForm()
+    template = 'orders/add_food.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
