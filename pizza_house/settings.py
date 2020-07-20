@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cart',
     'allauth.socialaccount',
     'checkout',
+    'profiles',
 
     # extra
 
