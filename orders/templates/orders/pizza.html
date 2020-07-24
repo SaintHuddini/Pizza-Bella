@@ -4,36 +4,48 @@
 {% block content %}
 
 <h1>Pizza</h1>
+<div class="container-fluid">
+	<div class="row mt-5">
+		<div class="col-3 themed-grid-col">
+			<strong>Name</strong>
+		</div>
+		<div class="col-3 themed-grid-col">
+			<strong>Description</strong>
+		</div>
+		<div class="col-3 themed-grid-col">
+			<strong>Price</strong>
+		</div>
+	</div>
+	<hr class="mb-4 mt-4">
 
-
-{% for p in pizza %}
-<div class="row ml-3">
-	<div class="col-3 themed-grid-col">{% if request.user.is_superuser %}
-		<small class="ml-3">
+	{% for p in pizza %}
+	<div class="row ml-1">
+		<div class="col-3 themed-grid-col">{% if request.user.is_superuser %}
+			<small class="ml-3">
                             <a href="{% url 'edit_food' p.id %}">Edit</a> | 
-                            <a class="text-danger" href="{% url 'delete_food' p.id %}">Delete</a>
+                            <a class="text-danger" href="{% url 'delete_food' p.id %}">Delete</a> | 
                         </small>
-		{% endif %} | {{p.name}}</div>
-	<div class="col-3 themed-grid-col">{{p.description}}</div>
-	<div class="col-3 themed-grid-col">${{p.price}} </div>
-	<form class="form" action="{% url 'add_to_cart' p.id %}" method="POST">
-		{% csrf_token %}
-		<div class="form-row">
-			<div class="col-12">
-				<p class="mt-3"><strong>Quantity:</strong></p>
-				<div class="form-group w-50">
+			{% endif %}{{p.name}}
+		</div>
+		<div class="col-3 themed-grid-col">{{p.description}}</div>
+		<div class="col-3 themed-grid-col">${{p.price}} </div>
+		<div class="col-3 themed-grid-col">
+			<form class="form" action="{% url 'add_to_cart' p.id %}" method="POST">
+				{% csrf_token %}
+				<p><strong>Quantity:</strong></p>
 
-					<input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ p.id }}" id="id_qty_{{ p.id }}">
+				<input class="form-control qty_input w-25" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ p.id }}" id="id_qty_{{ p.id }}">
 
+				<input type="submit" class="btn btn-sm btn-danger text-uppercase mt-4" value="Add to cart">
 
-
-					<input type="submit" class="btn btn-sm btn-danger text-uppercase mt-5" value="Add to cart">
-                            </div>
-					<input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        </div>
-	</form>
+				<input type="hidden" name="redirect_url" value="{{ request.path }}">
+				</div>
+			</form>
+		</div>
+		<hr>
+	</div>
 </div>
-</div>
+
 
 {% endfor  %}
 

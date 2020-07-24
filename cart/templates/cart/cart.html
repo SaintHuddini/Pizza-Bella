@@ -11,100 +11,82 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
-<div class="container mb-2">
+<div class="container">
 	<div class="row">
 		<div class="col">
-			<hr>
 			<h2 class="logo-font mb-4">Shopping Cart</h2>
 			<hr>
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col">
-			{% if cart_items %}
-			<div class="row ml-3 mb-5">
-				<div class="col-3 themed-grid-col">Choice:</div>
-				<div class="col-3 themed-grid-col">Price:</div>
-				<div class="col-3 themed-grid-col">Quantity:</div>
-                <div class="col-3 themed-grid-col">Subtotal:</div>
-			</div>
-			{% for item in cart_items %}
-			<div class="row ml-3 mb-5">
-				<div class="col-3 themed-grid-col">{{item.food.name}}</div>
-				<div class="col-3 themed-grid-col">${{item.food.price}}</div>
-				<div class="col-3 themed-grid-col">
-					<form class="form update-form " method="POST" action="{% url 'adjust_cart' item.item_id %}">
-						{% csrf_token %}
-						<div class="form-group">
-							<div class="input-group">
-								<input class="form-control form-control-sm qty_input" type="number"
+	{% if cart_items %}
+	<div class="row ml-3 mb-5">
+		<div class="col-3 themed-grid-col">Choice:</div>
+		<div class="col-3 themed-grid-col">Price:</div>
+		<div class="col-3 themed-grid-col">Subtotal:</div>
+		<div class="col-3 themed-grid-col">Quantity:</div>
+	</div>
+    <hr>
+	{% for item in cart_items %}
+	<div class="row ml-3 mb-5">
+		<div class="col-3 themed-grid-col">{{item.food.name}}</div>
+		<div class="col-3 themed-grid-col">${{item.food.price}}</div>
+
+		<div class="col-3 themed-grid-col">${{ item.food.price | calc_subtotal:item.quantity }}
+		</div>
+		<div class="col-3 themed-grid-col">
+			<form class="form update-form " method="POST" action="{% url 'adjust_cart' item.item_id %}">
+				{% csrf_token %}
+				<div class="input">
+					<input class="form-control form-control-sm qty_input mb-3 w-25" type="number"
                                                         name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                                         data-item_id="{{ item.item_id }}"
                                                         id="id_qty_{{ item.item_id }}">
-								<input type="submit" class="btn btn-info btn-sm ml-2" value="Update Cart">
-                                <a href="{% url 'remove_from_cart' item.item_id%}" class="ml-1 btn btn-danger">Remove</a>
-                                                </div>
-							</div>
-						</div>
-                    </form>
-                    
-                    <div class="col-3 themed-grid-col">${{ item.food.price | calc_subtotal:item.quantity }}</div>
-				
-                </div>
-				
-			</div>
+					<input type="submit" class="btn btn-info btn-sm" value="Update Cart">
+					<a href="{% url 'remove_from_cart' item.item_id%}" class="ml-1 btn btn-sm btn-danger">Remove</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<hr>
+
+	{% endfor %}
+	<div class="row">
+		<div class="col pt-5">
+			<h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
+			<h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
+			<h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col mb-4">
+			<a href="{% url 'menu' %}" class="btn btn-lg btn-primary">
+				<span class="icon">
+                                            <i class="fa fa-cutlery" aria-hidden="true"></i>
+                                        </span>
+				<span class="text-uppercase">Keep Shopping</span>
+			</a>
+			<a href="{% url 'checkout' %}" class="btn btn-lg text-primary">
+				<span class="text-uppercase">Secure Checkout </span>
+				<span class="icon">
+                                            <i class="fa fa-shield" aria-hidden="true"></i>
+                                        </span>
+			</a>
 		</div>
 
-		{% endfor %}
-		<table>
-			<tr>
-				<td colspan="5" class="pt-5 text-right">
-					<h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
-					<h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
-					<h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
-					{% if free_delivery_delta > 0 %}
-					<p class="mb-1 text-danger">
-						You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong>
-						more!
-					</p>
-					{% endif %}
-				</td>
-			</tr>
-			<tr>
-				<td colspan="5" class="text-right">
-					<a href="{% url 'menu' %}" class="btn btn-outline-black rounded-0 btn-lg">
-						<span class="icon">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </span>
-						<span class="text-uppercase">Keep Shopping</span>
-					</a>
-					<a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
-						<span class="text-uppercase">Secure Checkout</span>
-						<span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-					</a>
-				</td>
-			</tr>
-		</table>
-
-		</table>
+	</div>
 
 
-
-
-		{% else %}
-		<p class="lead mb-5">Your Cart is empty.</p>
-		<a href="{% url 'menu' %}" class="btn btn-outline-black rounded-0 btn-lg">
-			<span class="icon">
+	{% else %}
+	<p class="lead mb-5">Your Cart is empty.</p>
+	<a href="{% url 'menu' %}" class="btn btn-outline-black rounded-0 btn-lg">
+		<span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
-			<span class="text-uppercase">Keep Ordering</span>
-		</a>
-		{% endif %}
-	</div>
+		<span class="text-uppercase"> Keep Ordering</span>
+	</a>
+	{% endif %}
+</div>
 </div>
 </div>
 {% endblock %}
