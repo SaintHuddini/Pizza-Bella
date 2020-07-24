@@ -38,7 +38,7 @@
 	<header class="container-fluid fixed-top">
 		<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
 			<a class="navbar-brand" href="{% url 'home' %}">
-				<img src="{% static 'images/pizza_house.png' %}" alt="Pizza_house_logo" width="70" height="70">
+				<img src="{% static 'images/pizza_house.png' %}" alt="Pizza_house_logo" width="50" height="50">
 			</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                      <span class="navbar-toggler-icon"></span>
@@ -49,15 +49,14 @@
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
 						<!--Book Now Button in Navbar BS -->
-                        <li class="nav-item">
+						<li class="nav-item">
 							<a class="nav-link btn btn-primary text-white mr-5 mt-1" href="{% url 'menu' %}">Menu</a>
 						</li>
 						<li class="list-inline-item dropdown">
 							<a class="text-dark nav-link" href="#" id="user-options" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">
 								<div class="text-center">
-									<i class="fa fa-user" aria-hidden="true"></i>
-									<p class="my-0">My Account</p>
+									<p class="my-0">Account</p>
 								</div>
 							</a>
 							<div class="dropdown-menu border-0" aria-labelledby="user-options">
@@ -94,7 +93,21 @@
 		</nav>
 	</header>
 	{% if messages %}
-	<div class="message-container"></div>
+	<div class="message-container">
+		{% for message in messages %}
+		{% with message.level as level %}
+		{% if level == 40 %}
+		{% include 'includes/toasts/toast_error.html' %}
+		{% elif level == 30 %}
+		{% include 'includes/toasts/toast_warning.html' %}
+		{% elif level == 25 %}
+		{% include 'includes/toasts/toast_success.html' %}
+		{% else %}
+		{% include 'includes/toasts/toast_info.html' %}
+		{% endif %}
+		{% endwith %}
+		{% endfor %}
+	</div>
 	{% endif %}
 
 	{% block page_header %}
@@ -103,8 +116,12 @@
 	{% block content %}
 	{% endblock %}
 
-	{% block postloadjs %}
-	{% endblock %}
+	 {% block postloadjs %}
+    <script type="text/javascript">
+        $('.toast').toast('show');
+    </script>
+    {% endblock %}
+
 </body>
 
 </html>
