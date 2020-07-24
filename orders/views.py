@@ -2,15 +2,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import Recipe
 from django.http import HttpResponse
 from .forms import FoodForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 # Create your views here.
 
-pizza = Recipe.objects.filter(category='PIZZA')
-hamburger = Recipe.objects.filter(category='HAMBURGER')
-pasta = Recipe.objects.filter(category='PASTA')
-salad = Recipe.objects.filter(category='SALAD')
-kebab = Recipe.objects.filter(category='KEBAB')
 
 
 def home(request):
@@ -18,17 +14,11 @@ def home(request):
 
 
 def menu(request):
-    context = {
-        'pizza': pizza,
-        'kebab': kebab,
-        'pasta': pasta,
-        'salad': salad,
-        'hamburger': hamburger,
-    }
-    return render(request, 'orders/menu.html', context)
+    return render(request, 'orders/menu.html')
 
 
 def pizza_menu(request):
+    pizza = Recipe.objects.filter(category='PIZZA')
     context = {
         'pizza': pizza,
     }
@@ -36,6 +26,7 @@ def pizza_menu(request):
 
 
 def kebab_menu(request):
+    kebab = Recipe.objects.filter(category='KEBAB')
     context = {
         'kebab': kebab,
     }
@@ -43,6 +34,7 @@ def kebab_menu(request):
 
 
 def salad_menu(request):
+    salad = Recipe.objects.filter(category='SALAD')
     context = {
         'salad': salad,
     }
@@ -50,6 +42,7 @@ def salad_menu(request):
 
 
 def pasta_menu(request):
+    pasta = Recipe.objects.filter(category='PASTA')
     context = {
         'pasta': pasta,
     }
@@ -57,6 +50,7 @@ def pasta_menu(request):
 
 
 def hamburger_menu(request):
+    hamburger = Recipe.objects.filter(category='HAMBURGER')
     context = {
         'hamburger': hamburger,
     }
@@ -108,3 +102,17 @@ def edit_food(request, food_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_food(request, food_id):
+    """ Delete a food from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    food = get_object_or_404(Recipe, pk=food_id)
+    print(food)
+    food.delete()
+    messages.success(request, 'Food deleted!')
+    return redirect(reverse('menu'))

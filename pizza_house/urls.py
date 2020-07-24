@@ -24,10 +24,6 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path('profile/', include('profiles.urls')),
     path('', include('orders.urls')),
-    path('menu/', menu, name='menu'),
-    path('menu/pasta', pasta_menu, name='pasta_menu'),
-    path('menu/salad', salad_menu, name='salad_menu'),
-    path('menu/hamburger', hamburger_menu, name='hamburger_menu'),
-    path('menu/kebab', kebab_menu, name='kebab_menu'),
+   
 
 ]
