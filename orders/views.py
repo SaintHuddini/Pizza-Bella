@@ -8,7 +8,6 @@ from django.urls import reverse
 # Create your views here.
 
 
-
 def home(request):
     return render(request, 'orders/home.html')
 
@@ -57,7 +56,13 @@ def hamburger_menu(request):
     return render(request, 'orders/hamburger.html', context)
 
 
+@login_required
 def add_food(request):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
     """ Add a product to the store """
     if request.method == 'POST':
         form = FoodForm(request.POST, request.FILES)
@@ -79,8 +84,13 @@ def add_food(request):
     return render(request, template, context)
 
 
-
+@login_required
 def edit_food(request, food_id):
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
     """ Edit a product in the store """
     food = get_object_or_404(Recipe, pk=food_id)
     if request.method == 'POST':
@@ -90,7 +100,8 @@ def edit_food(request, food_id):
             messages.success(request, 'Successfully updated Food!')
             return redirect(reverse('menu'))
         else:
-            messages.error(request, 'Failed to update food item. Please ensure the form is valid.')
+            messages.error(
+                request, 'Failed to update food item. Please ensure the form is valid.')
     else:
         form = FoodForm(instance=food)
         messages.info(request, f'You are editing {food.name}')
