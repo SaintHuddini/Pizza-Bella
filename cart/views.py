@@ -33,11 +33,11 @@ def adjust_cart(request, item_id):
 
 def remove_from_cart(request, item_id):
     
-
+    
     cart = request.session.get('cart', {})
 
-    
-    cart.pop(item_id)
+    print(item_id)
+    cart.pop(str(item_id))
 
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
