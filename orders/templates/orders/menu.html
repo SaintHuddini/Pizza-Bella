@@ -3,19 +3,19 @@
 
 {% block content %}
 
-<h1>Menu</h1>
+<h1 class="mb-5">Menu</h1>
 
 
 <div class="container">
 	<div class="row">
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6">
 			<a class="btn " href="{% url 'hamburger_menu' %}" role="button">
 				<h3>Hamburger</h3>
 				<img src="https://images.unsplash.com/photo-1457460866886-40ef8d4b42a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="img-fluid"
                         alt="Responsive image">
              </a>
 		</div>
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6">
 			<a class="btn " href="{% url 'pasta_menu' %}" role="button">
 				<h3>Pasta</h3>
 				<img src="https://images.unsplash.com/photo-1567608285969-48e4bbe0d399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80" class="img-fluid"
@@ -24,32 +24,32 @@
 		</div>
 	</div>
 
-    <div class="row">
-		<div class="col-6">
+	<div class="row">
+		<div class="col-md-12 col-lg-6">
 			<a class="btn " href="{% url 'salad_menu' %}" role="button">
 				<h3>Salad</h3>
 				<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="img-fluid"
                         alt="Responsive image">
              </a>
 		</div>
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6">
 			<a class="btn " href="{% url 'kebab_menu' %}" role="button">
 				<h3>Kebab</h3>
 				<img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="img-fluid"
                         alt="Responsive image">
             </a>
 		</div>
-	<div class="row">
-		<div class="col-12 p-5">
-			<a class="btn" href="{% url 'pizza_menu' %}" role="button">
-				<h3>Pizza</h3>
-				<img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1250&q=80" class="img-fluid"
+		<div class="row">
+			<div class="col-12 p-4">
+				<a id="pizza-menu-entry" class="btn" href="{% url 'pizza_menu' %}" role="button">
+					<h3>Pizza</h3>
+					<img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1250&q=80" id="pizza-pic" class="img-fluid"
                         alt="Responsive image">
-            </a>
+                </a>
 
+			</div>
 		</div>
-	</div>
-	
+
 	</div>
 </div>
 

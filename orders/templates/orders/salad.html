@@ -1,53 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'orders/css/style.css' %}">
+{% endblock %}
 
 {% block content %}
-
-<h1>Salad</h1>
-<div class="container-fluid">
-	<div class="row mt-5">
-		<div class="col-3 themed-grid-col">
-			<strong>Name</strong>
-		</div>
-		<div class="col-3 themed-grid-col">
-			<strong>Description</strong>
-		</div>
-		<div class="col-3 themed-grid-col">
-			<strong>Price</strong>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1 class="logo-font mb-5 text-center">Salad</h1>
 		</div>
 	</div>
-	<hr class="mb-4 mt-4">
-
+	<div class="row ml-3 mb-5">
+		<div class="col-3 d-none d-sm-block d-xl-block themed-grid-col"><strong>Name:</strong></div>
+		<div class="col-3 d-none d-sm-block d-xl-block themed-grid-col"><strong>Description</strong></div>
+		<div class="col-3 d-none d-sm-block d-xl-block themed-grid-col"><strong>Price</strong></div>
+	</div>
+    <hr>
 	{% for s in salad %}
-	<div class="row ml-1">
-		<div class="col-3 themed-grid-col">{% if request.user.is_superuser %}
-			<small class="ml-3">
-                            <a href="{% url 'edit_food' p.id %}">Edit</a> | 
-                            <a class="text-danger" href="{% url 'delete_food' p.id %}">Delete</a> | 
-                        </small>
-			{% endif %}{{s.name}}
+	<div class="row ml-3 mb-5">
+		<div class="col-12 col-sm-3 themed-grid-col">{{s.name}}</div>
+		<div class="col-12 col-sm-3 themed-grid-col">{{s.description}}</div>
+
+		<div class="col-12 col-sm-3 themed-grid-col">${{ s.price }}
 		</div>
-		<div class="col-3 themed-grid-col">{{s.description}}</div>
-		<div class="col-3 themed-grid-col">${{s.price}} </div>
-		<div class="col-3 themed-grid-col">
+		<div class="col-12 col-sm-3 themed-grid-col">
 			<form class="form" action="{% url 'add_to_cart' s.id %}" method="POST">
 				{% csrf_token %}
-				<p><strong>Quantity:</strong></p>
+				<div class="input">
+					<input class="form-control qty_input form-qty " type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ s.id }}" id="id_qty_{{ s.id }}">
 
-				<input class="form-control qty_input w-25" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ s.id }}" id="id_qty_{{ s.id }}">
-
-				<input type="submit" class="btn btn-sm btn-danger text-uppercase mt-4" value="Add to cart">
-
-				<input type="hidden" name="redirect_url" value="{{ request.path }}">
+					<input type="submit" class="btn btn-sm btn-danger text-uppercase mt-4 float-right" value="Add to cart">
+					<input type="hidden" name="redirect_url" value="{{ request.path }}">
 				</div>
 			</form>
 		</div>
-		<hr>
 	</div>
-</div>
+	<hr>
 
-
-{% endfor  %}
-
+{% endfor %}
 
 {% endblock%}
