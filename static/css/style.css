@@ -71,8 +71,6 @@ input[name='q']::placeholder {
     color: #aab7c4;
 }
 
-/* ------------------------------- bootstrap toasts */
-
 .message-container {
     position: fixed;
     top: 72px;
@@ -133,8 +131,8 @@ input[name='q']::placeholder {
     border-bottom-color: #343a40 !important;
 }
 
-.bag-notification-wrapper {
-    height: 100px;
+.cart-notification-wrapper {
+    height: 35px;
     overflow-x: hidden;
     overflow-y: auto;
 }
