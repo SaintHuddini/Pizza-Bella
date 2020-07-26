@@ -1,3 +1,6 @@
+"""
+Webhook handler for Stripe
+"""
 from django.http import HttpResponse
 
 from .models import Order, OrderLineItem
@@ -17,7 +20,6 @@ class StripeWH_Handler:
     def __init__(self, request):
         self.request = request
 
-
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email"""
         cust_email = order.email
@@ -27,14 +29,12 @@ class StripeWH_Handler:
         body = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
         send_mail(
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [cust_email]
-        )        
-
+        )
 
     def handle_event(self, event):
         """
@@ -103,7 +103,7 @@ class StripeWH_Handler:
         if order_exists:
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
+                content=f'Webhook received: {event["type"]}| SUCCESS: Verified order already in database',
                 status=200)
         else:
             order = None
@@ -136,7 +136,7 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
-        
+
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',

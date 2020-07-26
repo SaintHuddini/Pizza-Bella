@@ -1,21 +1,31 @@
+"""
+Views file for checkout page and checkout success page
+"""
+import json
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 
-from .forms import OrderForm
-from .models import Order, OrderLineItem
-from orders.models import Recipe
-from cart.contexts import cart_contents
-
 import stripe
-import json
+
+from cart.contexts import cart_contents
+from orders.models import Recipe
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
+
+from .forms import OrderForm
+from .models import Order, OrderLineItem
+
+
 
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Saves Checkout Data
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -32,6 +42,9 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Checkout page view
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -68,8 +81,7 @@ def checkout(request):
                 except Recipe.DoesNotExist:
                     messages.error(request, (
                         "One of the item in your cart wasn't found in our database. "
-                        "Please call us for assistance!")
-                    )
+                        "Please call us for assistance!"))
                     order.delete()
                     return redirect(reverse('view_cart'))
 

@@ -1,22 +1,34 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from .models import Recipe
-from django.http import HttpResponse
-from .forms import FoodForm
+"""
+Home, Menu and Food page views
+"""
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse
+from .models import Recipe
+from .forms import FoodForm
+
+
 # Create your views here.
 
 
 def home(request):
+    """
+    Home View
+    """
     return render(request, 'orders/home.html')
 
 
 def menu(request):
+    """
+    Menu View
+    """
     return render(request, 'orders/menu.html')
 
 
 def pizza_menu(request):
+    """
+    Pizza Page view
+    """
     pizza = Recipe.objects.filter(category='PIZZA')
     context = {
         'pizza': pizza,
@@ -25,6 +37,9 @@ def pizza_menu(request):
 
 
 def kebab_menu(request):
+    """
+    Kebab Page view
+    """
     kebab = Recipe.objects.filter(category='KEBAB')
     context = {
         'kebab': kebab,
@@ -33,6 +48,9 @@ def kebab_menu(request):
 
 
 def salad_menu(request):
+    """
+    Salad Page view
+    """
     salad = Recipe.objects.filter(category='SALAD')
     context = {
         'salad': salad,
@@ -41,6 +59,9 @@ def salad_menu(request):
 
 
 def pasta_menu(request):
+    """
+    Pasta Page view
+    """
     pasta = Recipe.objects.filter(category='PASTA')
     context = {
         'pasta': pasta,
@@ -49,6 +70,9 @@ def pasta_menu(request):
 
 
 def hamburger_menu(request):
+    """
+    Hamburger Page view
+    """
     hamburger = Recipe.objects.filter(category='HAMBURGER')
     context = {
         'hamburger': hamburger,
@@ -58,12 +82,11 @@ def hamburger_menu(request):
 
 @login_required
 def add_food(request):
-
+    """ Add a food item to the menu """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    """ Add a product to the store """
     if request.method == 'POST':
         form = FoodForm(request.POST, request.FILES)
         if form.is_valid():
@@ -86,12 +109,11 @@ def add_food(request):
 
 @login_required
 def edit_food(request, food_id):
-
+    """ Edit a food item in the menu """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
-    """ Edit a product in the store """
     food = get_object_or_404(Recipe, pk=food_id)
     if request.method == 'POST':
         form = FoodForm(request.POST, request.FILES, instance=food)
@@ -117,7 +139,7 @@ def edit_food(request, food_id):
 
 @login_required
 def delete_food(request, food_id):
-    """ Delete a food from the store """
+    """ Delete a food item from the menu """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))

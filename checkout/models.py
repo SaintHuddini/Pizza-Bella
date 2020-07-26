@@ -1,8 +1,11 @@
+"""
+Model for the Order
+"""
+
 import uuid
 
 from django.db import models
 from django.db.models import Sum
-from django.conf import settings
 from django_countries.fields import CountryField
 from orders.models import Recipe
 from profiles.models import UserProfile
@@ -11,6 +14,9 @@ from profiles.models import UserProfile
 # Create your models here.
 
 class Order(models.Model):
+    """
+    Order Model
+    """
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='orders')
@@ -32,13 +38,14 @@ class Order(models.Model):
                                       null=False, default=0)
     original_cart = models.TextField(null=False, blank=False, default='')
     original_cart = models.TextField(null=False, blank=False, default='')
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default='')
+
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()
-    
 
     def update_total(self):
         """
@@ -68,11 +75,14 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
+    """
+    The details of the order
+    """
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
                               related_name='lineitems')
     food = models.ForeignKey(Recipe, null=False, blank=False,
-                                on_delete=models.CASCADE)
+                             on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2,
                                          null=False, blank=False,

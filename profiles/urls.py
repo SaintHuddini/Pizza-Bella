@@ -1,3 +1,6 @@
+"""
+Profile View and Order History
+"""
 from django.urls import path
 from . import views
 

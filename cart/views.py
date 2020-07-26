@@ -1,3 +1,6 @@
+"""
+Cart Views
+"""
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.contrib import messages
 
@@ -5,11 +8,16 @@ from orders.models import Recipe
 
 
 def view_cart(request):
+    """
+    Rendering Cart Page
+    """
     return render(request, 'cart/cart.html')
 
 
 def add_to_cart(request, item_id):
-
+    """
+    Adding to cart logic
+    """
     food = get_object_or_404(Recipe, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
@@ -28,7 +36,9 @@ def add_to_cart(request, item_id):
 
 
 def adjust_cart(request, item_id):
-
+    """
+    Editing or deleting to cart logic
+    """
     food = get_object_or_404(Recipe, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
@@ -47,6 +57,9 @@ def adjust_cart(request, item_id):
 
 
 def remove_from_cart(request, item_id):
+    """
+    Delete from cart logic
+    """
     food = get_object_or_404(Recipe, pk=item_id)
     cart = request.session.get('cart', {})
 
