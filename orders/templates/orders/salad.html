@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{% static 'orders/css/style.css' %}">
 {% endblock %}
 
+{% block extra_title %} - Salad Menu {% endblock %}
+
 {% block content %}
 <div class="container">
 	<div class="row">
@@ -17,7 +19,7 @@
 		<div class="col-3 d-none d-sm-block d-xl-block themed-grid-col"><strong>Description</strong></div>
 		<div class="col-3 d-none d-sm-block d-xl-block themed-grid-col"><strong>Price</strong></div>
 	</div>
-    <hr>
+	<hr>
 	{% for s in salad %}
 	<div class="row ml-3 mb-5">
 		<div class="col-12 col-sm-3 themed-grid-col">{{s.name}}</div>
@@ -37,8 +39,25 @@
 			</form>
 		</div>
 	</div>
-	<hr>
+</div>
+<hr>
 
 {% endfor %}
-
+<footer>
+	<div class="container-fluid ">
+		<div class="text-center">
+			<div class="col-sm" id="contact-us">
+				<p><b>Contact us:</b><br>
+                        Gamla Stan, Stockholm<br>
+                        617-876-4897<br>
+                        pizzahouse@gmail.com
+                    </p>
+			</div>
+		</div>
+		<hr class="w-50">
+		<div class="text-center text-info">
+			<p>&copy;SaintHuddini 2020</p>
+		</div>
+	</div>
+</footer>
 {% endblock%}
