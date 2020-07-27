@@ -30,11 +30,12 @@
 	{% endblock %}
 
 	{% block extra_js %} {% endblock %}
-    
+
 	<title>Pizza House {% block extra_title %} {% endblock %}</title>
 </head>
 
 <body>
+<!-- Header -->
 	<header class="container-fluid fixed-top">
 		<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
 			<a class="navbar-brand" href="{% url 'home' %}">
@@ -44,11 +45,11 @@
                      <span class="navbar-toggler-icon"></span>
                  </button>
 
-				<!--collapsing navbar BS-->
+				<!--collapsing navbar Accounts-->
 
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-                        <li class="list-inline-item dropdown">
+						<li class="list-inline-item dropdown">
 							<a class="text-dark nav-link text-center" href="#" id="user-options" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">
 								<div class="text-center">
@@ -68,10 +69,11 @@
 								{% endif %}
 							</div>
 						</li>
-
+                    <!-- Menu -->
 						<li class="nav-item">
 							<a class="nav-link text-dark text-center" href="{% url 'menu' %}">Menu</a>
 						</li>
+                    <!-- Cart -->
 						<li class="list-inline-item">
 							<a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-dark{% endif %} nav-link"
 								href="{% url 'view_cart' %}">
@@ -91,6 +93,7 @@
 				</div>
 		</nav>
 	</header>
+    <!-- Messages -->
 	{% if messages %}
 	<div class="message-container">
 		{% for message in messages %}
@@ -115,11 +118,12 @@
 	{% block content %}
 	{% endblock %}
 
-	 {% block postloadjs %}
-    <script type="text/javascript">
-        $(".toast").toast("show");
-    </script>
-    {% endblock %}
+	{% block postloadjs %}
+    <!-- Toast function -->
+	<script type="text/javascript">
+		$(".toast").toast("show");
+	</script>
+	{% endblock %}
 
 </body>
 

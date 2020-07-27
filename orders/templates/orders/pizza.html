@@ -22,7 +22,12 @@
 	<hr>
 	{% for p in pizza %}
 	<div class="row ml-3 mb-5">
-		<div class="col-12 col-sm-3 themed-grid-col ">{{p.name}}</div>
+		<div class="col-12 col-sm-3 themed-grid-col ">{% if request.user.is_superuser %}
+			<small class="ml-3">
+                            <a href="{% url 'edit_food' p.id %}">Edit</a> | 
+                            <a class="text-danger" href="{% url 'delete_food' p.id %}">Delete</a>
+                        </small>
+			{% endif %}{{p.name}}</div>
 		<div class="col-12 col-sm-3 themed-grid-col">{{p.description}}</div>
 
 		<div class="col-12 col-sm-3 themed-grid-col">${{ p.price }}
@@ -39,13 +44,11 @@
 			</form>
 		</div>
 	</div>
-</div>
-<hr>
+	<hr>
 
-{% endfor %}
-<footer>
-	<div class="container-fluid ">
-		<div class="text-center">
+	{% endfor %}
+	<footer>
+		<div class="row text-center">
 			<div class="col-sm" id="contact-us">
 				<p><b>Contact us:</b><br>
                         Gamla Stan, Stockholm<br>
@@ -58,6 +61,7 @@
 		<div class="text-center text-info">
 			<p>&copy;SaintHuddini 2020</p>
 		</div>
-	</div>
-</footer>
+	</footer>
+</div>
+
 {% endblock%}

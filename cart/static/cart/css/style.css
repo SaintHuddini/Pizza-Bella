@@ -1,3 +1,4 @@
+/* Making the button float right so the design looks better in mobile version */
 a#remove-from-cart {
     float: right;
 }
