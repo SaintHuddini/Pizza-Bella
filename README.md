@@ -60,13 +60,13 @@
 
 ## Technologies/Databases Used
 
-Python3 - Backend Logic for the website.
-Stripe - For payments.
-JavaScript/Jquery - For payment aand toast logic.
-SQLite - for storing data.
-HTML5 - For structure and text.
-Google Fonts To make the website more user friendly.
-Bootstrap4/CSS - For classes of color and responsiveness of the website
+* Python3 - Backend Logic for the website.
+* Stripe - For payments.
+* JavaScript/Jquery - For payment aand toast logic.
+* SQLite - for storing data.
+* HTML5 - For structure and text.
+* Google Fonts To make the website more user friendly.
+* Bootstrap4/CSS - For classes of color and responsiveness of the website
 
 
 ## Testing
