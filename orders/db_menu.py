@@ -1,7 +1,7 @@
 """
 Foods in the database and how I did it inte the shell
 """
-from .models import Recipe
+from orders.models import Recipe
 
 
 salad = [
