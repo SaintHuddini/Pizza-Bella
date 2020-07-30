@@ -1,1 +1,1 @@
-web: pizza_house.wsgi:application
+web: gunicorn pizza_house.wsgi:application
