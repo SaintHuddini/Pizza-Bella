@@ -1,8 +1,7 @@
 # Pizza House
 
-... This is a website made for people who love to order food from home.
-... You will find every type of fast food here for a good price and a 
-... easy way on ordering them.
+This is a website made for people who love to order food from home.
+You will find every type of fast food here for a good price and a easy way on ordering them, enjoy!
 
 ## UX
 
