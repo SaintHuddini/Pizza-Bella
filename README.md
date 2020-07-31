@@ -1,5 +1,9 @@
 # Pizza House
 
+... This is a website made for people who love to order food from home.
+... You will find every type of fast food here for a good price and a 
+... easy way on ordering them.
+
 ## UX
 
 ### User Stories
@@ -20,6 +24,7 @@
 * User story 14 : As an admin, I can add food items to the menu, edit and delete them.
 * User Story 15 :  As an admin I can go to the admin panel and see order details.
 
+Mockups: [Wireframe (click me)](pizza_house.pdf)
 
 ## Features
 
@@ -63,7 +68,8 @@
 * Python3 - Backend Logic for the website.
 * Stripe - For payments.
 * JavaScript/Jquery - For payment aand toast logic.
-* SQLite - for storing data.
+* SQLite - for storing data in the workspace.
+* Postgres - for storing data in Heroku.
 * HTML5 - For structure and text.
 * Google Fonts To make the website more user friendly.
 * Bootstrap4/CSS - For classes of color and responsiveness of the website
@@ -71,7 +77,7 @@
 
 ## Testing
 
-
+[TESTME.md (click me)](TESTME.md)
 
 
 ## Deployment
