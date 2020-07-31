@@ -5,10 +5,10 @@ from orders.models import Recipe
 
 
 salad = [
-    {'name': 'Garden Salad', 'category': 'SALLAD', 'price': 7.55},
-    {'name': 'Greek Salad', 'category': 'SALLAD', 'price': 9.75},
-    {'name': 'Antipasto', 'category': 'SALLAD', 'price': 7.45},
-    {'name': 'Salad w/Tuna', 'category': 'SALLAD', 'price': 8.95},
+    {'name': 'Garden Salad', 'category': 'SALAD', 'price': 7.55},
+    {'name': 'Greek Salad', 'category': 'SALAD', 'price': 9.75},
+    {'name': 'Antipasto', 'category': 'SALAD', 'price': 7.45},
+    {'name': 'Salad w/Tuna', 'category': 'SALAD', 'price': 8.95},
 ]
 
 for fresh in salad:

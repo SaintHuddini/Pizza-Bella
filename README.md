@@ -76,15 +76,19 @@
 
 ## Deployment
 
-1. Create a requirements.txt file - command in the terminal: pip3 freeze — local > requirements.txt
-2. Create a Procfile - command in the terminal: echo web: python run.py > Procfile
+1. First install dj_database_url, psycopg2-binary, gunicorn and whitenoise.
+2. Create a requirements.txt file - command in the terminal: pip3 freeze — local > requirements.txt
+2. Create a Procfile - web: gunicorn pizza_house.wsgi:application
 3. Change debug from True to False.
 4. Login to Heroku. Command in the terminal: heroku login
 5. Create an new Heroku App
-6. Connect Heroku to repository - command: heroku git:remote -a diary-fever
-7. Create any config variables.
-8. Push the core to Heroku - command in the terminal: echo web: git push -u heroku master
-9. Run the App - command : heroku ps:scale web=1
+7. Add postgres Database from Heroku.
+8. Make pizza_house/settings.py changes with importing dj_database_url and adding the postgres database
+9. Migrate the changes.
+10. Connect Heroku to repository - ex. command: heroku git:remote -a  pizza_house
+11. Create any config variables.
+12. Push the core to Heroku - command in the terminal: echo web: git push -u heroku master
+13. Run the App - command : heroku ps:scale web=1
 
 
 ## Credit 
