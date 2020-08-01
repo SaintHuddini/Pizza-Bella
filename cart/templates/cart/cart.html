@@ -44,14 +44,14 @@
 		<div class="col-12 col-md-3 themed-grid-col">
 			<form class="form update-form " method="POST" action="{% url 'adjust_cart' item.item_id %}">
 				{% csrf_token %}
-				<div class="input">
+				<div class="input ">
 					<input class="form-control form-control-sm form-qty qty_input mb-3" type="number"
                                                         name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                                         data-item_id="{{ item.item_id }}"
                                                         id="id_qty_{{ item.item_id }}">
-					<input type="submit" class="btn btn-info btn-sm " value="Update">
+					<input type="submit" class="btn btn-info  " value="Update">
 					<a href="{% url 'remove_from_cart' item.item_id%}" id="remove-from-cart"
-						class=" btn btn-sm btn-danger ">Remove</a>
+						class=" btn btn-danger btn-lg "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 				</div>
 			</form>
 		</div>

@@ -1,0 +1,35 @@
+/* Welcome Page */
+h1#welcome-h1 {
+    margin-bottom:1.69rem;
+}
+
+#home-sm-img {
+    margin-top:4rem;
+}
+
+/* Footer */
+#contact-us {
+    margin-top:4.3rem;
+}
+
+
+
+/* Media Query */
+@media (max-width: 768px) {
+    div.home-page {
+    padding-top: 15px;
+}
+}
+
+
+@media (min-width: 992px) {
+    /* Making the homepage main content look propotional */
+    div.home-page {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    max-height: 589px;
+    overflow: hidden;
+}
+}
+
