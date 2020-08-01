@@ -12,7 +12,7 @@ from profiles.models import UserProfile
 from django.template.loader import render_to_string
 from pizza_house import settings
 from django.core.mail import send_mail
-from django.core.mail import EmailMessage
+import sys
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -29,11 +29,11 @@ class StripeWH_Handler:
         body = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
-        msg = EmailMessage('Request Callback',
-                       'Here is the message.', to=[cust_email])
-        msg.send()
-        
+        print(subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [cust_email])
+        sys.stdout.flush()
         send_mail(
             subject,
             body,
