@@ -60,7 +60,10 @@ Mockups: [Wireframe (click me)](pizza_house.pdf)
 ### Features Left to Implement
 
 * Delivery status
+* Order confirmation email
 * Adding toppings and extra things like Soda&chips.
+
+I didn't have time enough to implement these features and will do it instead in the future.
 
 ## Technologies/Databases Used
 
