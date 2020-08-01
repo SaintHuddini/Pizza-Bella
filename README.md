@@ -99,6 +99,8 @@ I didn't have time enough to implement these features and will do it instead in 
 13. Push the core to Heroku - command in the terminal: echo web: git push -u heroku master
 14. Run the App - command : heroku ps:scale web=1
 
+The difference between the live and development version is the database used.
+
 
 ## Credit 
 

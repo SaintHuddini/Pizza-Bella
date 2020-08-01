@@ -89,7 +89,7 @@
 
 ## Checkout Successful - test has been done on all type of screen sizes
 
-1. The user will see an order confirmation and order details on the checkout success page.
+1. Order details on the checkout success page.
 2. User will get a confirmation sent to the email address about the order.
 3. if user clicks on "Do you wanna order more?" button then user will be led back to the menu page.
 4. If user tries to reverse after submitting order, then user will be led back to the menu page.
@@ -114,3 +114,7 @@
 1. Message works and it is shown in the top right corner of the page.
 2. If sometihng added to cart then User can click on "Go to secure checkout" That will led the user to the cart page. 
 3. Error messages works and is shown with the toast notification.
+
+## Bugs found
+
+1. Order confirmation webhook - Left because, the error was tried to get fixed by me and the excellent support team but somehow didn't still work after many different ways of trying to find solutions. A bug that is left to fix in the future.
