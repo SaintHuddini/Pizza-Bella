@@ -37,7 +37,7 @@
 				{% csrf_token %}
 				<div class="input">
 					<input class="form-control qty_input form-qty" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ h.id }}" id="id_qty_{{ h.id }}">
-                    <i class="" aria-hidden="true"></i>
+					<i class="" aria-hidden="true"></i>
 					<input type="submit" class="btn float-right btn-sm btn-danger text-uppercase mt-4" value="Add">
 					<input type="hidden" name="redirect_url" value="{{ request.path }}">
 				</div>

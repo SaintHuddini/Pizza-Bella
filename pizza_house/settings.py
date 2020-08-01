@@ -71,7 +71,6 @@ ROOT_URLCONF = 'pizza_house.urls'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

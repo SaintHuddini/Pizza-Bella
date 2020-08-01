@@ -33,7 +33,7 @@
 		<div class="col-3 themed-grid-col d-none d-sm-block d-xl-block"><strong>Quantity:</strong></div>
 	</div>
 	<hr>
-    <!-- Cart Details -->
+	<!-- Cart Details -->
 	{% for item in cart_items %}
 	<div class="row ml-3 mb-5">
 		<div class="col-12 col-md-3 themed-grid-col">{{item.food.name}}</div>
@@ -59,7 +59,7 @@
 	<hr>
 
 	{% endfor %}
-    <!-- Price, Delivery and Grand Total -->
+	<!-- Price, Delivery and Grand Total -->
 	<div class="row">
 		<div class="col pt-5">
 			<h6><strong>Cart Total: ${{ total|floatformat:2 }}</strong></h6>
@@ -87,7 +87,7 @@
 
 
 	{% else %}
-    <!-- What shows in case the cart is empty. -->
+	<!-- What shows in case the cart is empty. -->
 	<p class="lead mb-5">Your Cart is empty.</p>
 	<a href="{% url 'menu' %}" class="btn btn-outline-primary rounded-0 btn-lg">
 		<span class="icon">

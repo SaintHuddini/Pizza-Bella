@@ -14,6 +14,7 @@ from pizza_house import settings
 from django.core.mail import send_mail
 import sys
 
+
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
 
@@ -30,9 +31,9 @@ class StripeWH_Handler:
             'checkout/confirmation_emails/confirmation_email_body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
         print(subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [cust_email])
+              body,
+              settings.DEFAULT_FROM_EMAIL,
+              [cust_email])
         sys.stdout.flush()
         send_mail(
             subject,
